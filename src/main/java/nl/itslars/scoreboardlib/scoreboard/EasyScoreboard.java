@@ -6,6 +6,7 @@ import nl.itslars.scoreboardlib.lines.TextLine;
 import nl.itslars.scoreboardlib.lines.animations.Animation;
 import nl.itslars.scoreboardlib.util.LineParser;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitTask;
@@ -36,9 +37,10 @@ public class EasyScoreboard {
     public EasyScoreboard(Player player, Line title) {
         this.player = player;
         this.title = title;
+        
         scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
         objective = scoreboard.registerNewObjective("scoreboard", "dummy");
-        objective.setDisplayName(title.next());
+        objective.setDisplayName(ChatColor.translateAlternateColorCodes('&', title.next()));
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
     }
 
@@ -86,7 +88,7 @@ public class EasyScoreboard {
             }
 
             if(execute) {
-                String text = line.next();
+                String text = ChatColor.translateAlternateColorCodes('&', line.next());
                 String[] parsedLine = LineParser.parseText(text);
 
                 team.setPrefix(parsedLine[0]);
